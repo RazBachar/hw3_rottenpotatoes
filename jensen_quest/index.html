@@ -43,9 +43,9 @@ canvas{display:block;width:100%;height:auto;background:#000;cursor:crosshair;tou
     <canvas id="cv" width="1920" height="1080"></canvas>
     <div id="msg"></div>
     <div id="title">
-      <h1>ג׳נסן בכנס<br>מסע המעיל</h1>
-      <h2>הרפתקת הצבע‑והקלק של AI‑CON 2026</h2>
-      <p>עשרים דקות לנאום המרכזי. המנכ״ל האגדי איבד את פתק המלתחה, ובלי מעיל העור אף אחד לא מאמין שזה הוא.</p>
+      <h1>ג׳נסן בכנס<br>ערב של רמיזות</h1>
+      <h2>הרפתקה סאטירית בסגנון הצבע‑והקלק</h2>
+      <p>ערב אחד לפני הכותרות. ג׳נסן בכנס AI‑CON ומחפש בת זוג לאפטר‑פארטי. מה כבר יכול להשתבש?</p><p style="font-size:12px;opacity:.6">סאטירה. כל הדמויות מלבד ג׳נסן בדיוניות.</p>
       <button id="start">▶ התחל לשחק</button>
     </div>
   </div>
@@ -54,12 +54,13 @@ canvas{display:block;width:100%;height:auto;background:#000;cursor:crosshair;tou
     <button class="vb" data-v="look" title="הסתכל">👁️</button>
     <button class="vb" data-v="take" title="קח / השתמש">✋</button>
     <button class="vb" data-v="talk" title="דבר">💬</button>
+    <button class="vb" data-v="flirt" title="פלרטט">😏</button>
     <div id="inv"></div>
     <button class="tool" id="hint" title="רמז">💡</button>
     <button class="tool" id="snd" title="צליל">🔊</button>
-    <div id="score">ניקוד: 0 מתוך 60</div>
+    <div id="score">ניקוד: 0 מתוך 60 · 📋 תלונות: 0</div>
   </div>
-  <input id="parser" placeholder="הקלד פקודה... (למשל: ״דבר עם הרובוט״, ״קח כפפה״, ״תן GPU לדילן״)" autocomplete="off">
+  <input id="parser" placeholder="הקלד פקודה... (למשל: ״פלרטט עם מאיה״, ״קח כפפה״, ״תן GPU לדילן״)" autocomplete="off">
   <div class="help">בחר פעולה ולחץ על משהו בתמונה · לחץ על פריט בתיק כדי להשתמש בו · 👁️ + פריט = תיאור</div>
 </div>
 <script>
@@ -182,6 +183,22 @@ function crowdHead(x,y,s,c,t,ph,arm){X.save();X.translate(x,y+Math.sin(t*6+ph)*3
   if(arm){X.save();X.rotate(Math.sin(t*5+ph)*.3);R(14,-90,12,60,6,c,2.5);E(20,-92,8,8,"#d9a77c",2);if(arm===2){R(13,-112,14,22,3,"#222",2);R(15,-110,10,16,2,"#9ef",0);}X.restore();}
   E(0,0,34,26,c,3);E(0,-40,20,22,["#d9a77c","#8d5a3b","#f0c49a","#c58c5c"][Math.abs(ph*7|0)%4],3);P();X.ellipse(0,-48,21,16,0,Math.PI,0);fs(["#2b1a10","#111","#7a4a20","#e8c070"][Math.abs(ph*5|0)%4],2.5);X.restore();}
 
+function longHair(c,len){return()=>{R(-33,-238,13,len,6,c,2.5);R(20,-238,13,len,6,c,2.5);P();X.ellipse(0,-236,31,22,0,Math.PI*1.0,Math.PI*2.0);fs(c,2.5);};}
+function maya(x,y,s,t){person(x,y,s,{w:24,top:"#2f9e44",pants:"#1b1b22",skin:"#e8b48a",ph:3.1,flip:true,
+  chest(){poly([-9,-184,9,-184,0,-150],"#fff",2);line([0,-150,0,-92],"#1f7a33",2);},
+  mouth(){P();X.arc(0,-208,7,.2*Math.PI,.8*Math.PI);fs(null,2.5);line([-14,-236,-5,-233],OL,2);line([5,-233,14,-236],OL,2);},
+  head:longHair("#2b1a10",66),
+  front(){R(30,-134,22,30,3,"#222",2.5);R(33,-131,16,22,2,"#7cf4ff",0);}},t);}
+function karen(x,y,s,t){person(x,y,s,{w:24,top:"#1e2a4a",pants:"#1e2a4a",skin:"#f6d3b3",ph:4.2,flip:true,
+  chest(){poly([-8,-184,8,-184,0,-160],"#e9ecef",2);},
+  mouth(){line([-6,-207,6,-208],OL,2.5);line([-14,-233,-5,-236],OL,2.5);line([5,-236,14,-233],OL,2.5);},
+  head:longHair("#e8c070",30),
+  front(){R(-34,-212,12,22,3,"#111",2);}},t);}
+function natasha(x,y,s,t){person(x,y,s,{w:24,top:"#c9a26b",pants:"#222",skin:"#f3d0b0",ph:5.3,flip:false,
+  chest(){line([-24,-120,24,-120],"#8a6a3a",5);R(-4,-124,8,8,1,"#ffd23f",1.5);line([-6,-182,0,-130,6,-182],"#8a6a3a",2);},
+  mouth(t){E(0,-207,6,3,"#d6336c",1.5);},
+  head(){longHair("#111",40)();R(-20,-232,17,11,4,"#111",2);R(3,-232,17,11,4,"#111",2);line([-3,-228,3,-228],"#111",2);E(-12,-229,3,2,"#ffffff60",0);
+    E(0,-246,44,8,"#2b2b33",2.5);R(-24,-274,48,30,8,"#2b2b33",2.5);R(-24,-254,48,7,2,"#a61e4d",1.5);}},t);}
 /* ---------- background builders (pre-rendered) ---------- */
 function mkCanvas(){const c=document.createElement("canvas");c.width=W*2;c.height=H*2;const g=c.getContext("2d");g.scale(2,2);return[c,g];}
 function bgLobby(){
@@ -273,17 +290,17 @@ function bgLounge(){
   txt("OVEN‑9000",716,374,11,"#555",{dir:"ltr",w:900});
   plant(918,392);
 }
-function bgStage(){
-  R(0,0,W,H,0,"#07030f",0);
-  for(let i=0;i<W;i+=28)R(i,0,24,330,0,lg(0,0,0,330,["#3a0f1a","#1a050a"]),0);
-  R(170,34,620,262,12,"#05140a",5);R(182,46,596,238,6,"#0b2410",0);
-  X.save();X.globalAlpha=.3;for(let i=0;i<20;i++)line([182+i*30,46,182+i*30,284],"#76b900",1);for(let j=0;j<8;j++)line([182,46+j*30,778,46+j*30],"#76b900",1);X.restore();
-  line([200,262,320,250,420,236,520,200,620,140,700,70,740,56],"#c8ff5a",6);poly([740,56,722,62,736,74],"#c8ff5a",0);
-  txt("ACCELERATE EVERYTHING",480,96,34,"#c8ff5a",{glow:"#76b900",dir:"ltr",w:900});
-  R(-5,330,W+10,70,0,lg(0,330,0,400,["#2e2e3e","#15151f"]),3);
-  for(let i=20;i<W;i+=60)E(i,392,6,4,"#ffd23f",1.5);
+function bgCongress(){
+  R(0,0,W,H,0,lg(0,0,0,H,["#3a2414","#5a3a20","#2a1a10"]),0);
+  for(let i=0;i<W;i+=48)R(i+4,10,40,300,4,"rgba(255,255,255,.04)",0);
+  E(480,64,46,46,"#c9a227",4);E(480,64,36,36,"#1c3a7a",3);txt("★",480,64,30,"#f5ecd0",{dir:"ltr"});
+  for(const fx of[90,870]){line([fx,40,fx,330],"#c9a227",5);X.save();X.translate(fx+4,48);for(let k=0;k<7;k++)R(0,k*12,74,12,0,k%2?"#f5f5f5":"#c92a2a",0);R(0,0,32,48,0,"#1c3a7a",0);R(0,0,74,84,0,null,2.5);X.restore();}
+  for(let i=0;i<7;i++){const x=200+i*93;crowdHead(x,212,.8,["#222","#2a2a3a","#3a2a2a"][i%3],0,i*1.3);}
+  R(150,200,660,100,10,lg(0,200,0,300,["#8a5a30","#5a3418"]),4);R(140,192,680,16,6,"#a8743f",3);
+  for(let i=0;i<7;i++){R(176+i*93,228,48,16,3,"#f5ecd0",2);}
+  txt("ועדת חקירה משותפת · דיון סגור",480,272,15,"#f5ecd0",{w:800});
+  R(-5,320,W+10,230,0,lg(0,320,0,540,["#5a1a1a","#3a0e0e"]),3);
 }
-
 /* ---------- state ---------- */
 const S={room:"lobby",x:480,y:470,tx:480,ty:470,dir:1,ph:0,moving:false,pending:null,gpus:0,f:{},score:0,verb:"walk",item:null,t:0,mx:-1,my:-1,fade:0,started:false,ended:false,sound:true};
 const MAXSCORE=60;
@@ -293,7 +310,7 @@ const conf=[];
 /* ---------- speech ---------- */
 const NAR={n:"המספר",c:"#8a2d9c"};
 const sp=(n,c)=>t=>({w:{n,c},t});
-const J=sp("ג׳נסן","#3d7a00"),ROBOT=sp("RegBot‑9000","#00739e"),COAT=sp("דורית מהמלתחה","#c2185b"),BOSS=sp("ביג מייק, מנהל הבמה","#b35400"),DYL=sp("דילן, מייסד סטארטאפ","#6a1b9a"),SLEEPY=sp("חוקרת ישנונית","#00796b");
+const J=sp("ג׳נסן","#3d7a00"),ROBOT=sp("RegBot‑9000","#00739e"),COAT=sp("דורית מהמלתחה","#c2185b"),BOSS=sp("ביג מייק, מנהל הבמה","#b35400"),DYL=sp("דילן, מייסד סטארטאפ","#6a1b9a"),SLEEPY=sp("חוקרת ישנונית","#00796b"),MAYA=sp("מאיה, סמנכ״לית שיווק","#2b8a3e"),KAREN=sp("קרן, CTO של ענן גדול","#1c4fa0"),NAT=sp("נטשה, ״יועצת״","#a61e4d"),CHAIR=sp("יו״ר ועדת החקירה","#1c4fa0");
 const Q=[];let msgOpen=false,inNext=false;
 function say(lines,cb){[].concat(lines).forEach(l=>Q.push(typeof l==="string"?{w:NAR,t:l}:l));if(cb)Q.push({fn:cb});if(!msgOpen&&!inNext)next();}
 function next(){inNext=true;while(Q.length&&Q[0].fn)Q.shift().fn();inNext=false;
@@ -324,22 +341,37 @@ function icon(id){const key=id+(id==="gpu"?S.gpus:"");if(iconCache[key])return i
 function renderInv(){const el=document.getElementById("inv");el.innerHTML="";const list=invList();if(S.item&&!list.includes(S.item)){S.item=null;if(S.verb==="item")setVerb("walk");}
   list.forEach(id=>{const b=document.createElement("button");b.className="slot"+(S.verb==="item"&&S.item===id?" on":"");b.title=ITEMS[id].name;b.innerHTML=`<img alt="${ITEMS[id].name}" src="${icon(id)}">`;
     b.onclick=()=>{if(S.ended)return;if(msgOpen){next();return;}if(S.verb==="look"){const d=ITEMS[id].desc;say(typeof d==="function"?d():d);return;}if(S.verb==="item"&&S.item===id){setVerb("walk");return;}S.item=id;setVerb("item");};el.appendChild(b);});
-  document.getElementById("score").textContent=`ניקוד: ${S.score} מתוך ${MAXSCORE}`;}
+  document.getElementById("score").textContent=`ניקוד: ${S.score} מתוך ${MAXSCORE} · 📋 תלונות: ${S.f.rejects||0}`;}
 function setVerb(v){S.verb=v;if(v!=="item")S.item=null;document.querySelectorAll(".vb").forEach(b=>b.classList.toggle("on",b.dataset.v===v));renderInv();}
 function addScore(n){S.score+=n;jingle();renderInv();}
 
 /* ---------- rooms ---------- */
 const DEF={look:["שום דבר מיוחד. אפילו לא באג מעניין."],take:["אני לא יכול לקחת את זה.","זה לא מגיע עם רישיון שימוש.","ידיים לעצמך, ג׳נסן."],talk:["זה לא עונה. גם לא בהזיה.","אין לזה מה להגיד. כמו רוב הפאנלים בכנס."],item:["זה לא עובד ככה.","ניסיון יפה. לא.","גם עם CUDA זה לא היה עובד."]};
 function bossTalk(){
-  if(!S.f.badge)return[BOSS("אתה? לבמה? בלי תג? חמוד."),J("אני הנואם המרכזי! ג׳נסן!"),BOSS("כל השבוע אנשים במעיל עור אומרים לי את זה. בלי תג דובר — אתה לא עובר."),BOSS("ועוד משהו: הקהל רוצה דמו. תביא משהו נוצץ להחזיק מול המצלמות.")];
-  if(S.gpus<1)return[BOSS("התג תקין. אבל איפה הדמו? אין דמו — אין קינוט.")];
-  say([BOSS("תג דובר... ✓. דמו נוצץ... ✓. מעיל עור... ✓✓✓."),BOSS("אתה בפנים, בוס. עשרים אלף איש מחכים."),"ביג מייק פותח את הדלתות. אור מסנוור. רעש של קהל. ריח של מכונת עשן."],()=>{addScore(15);goRoom("stage",480,372,ending);});
+  if(S.f.date)return[BOSS("אתה והגברת בפנים. תהנו.")];
+  S.f.bossMet=1;return[BOSS("קינוט? בוטל, בוס. הדירקטוריון אמר שהערב יש רק אפטר‑פארטי."),BOSS("ותשמע טוב: זו מסיבת זוגות. בלי בת זוג — אתה לא עובר את הדלת הזאת."),J("בת זוג? אין בעיה. אני ג׳נסן. אני הולך לקסום למישהי."),BOSS("כן. בהצלחה עם זה.")];
+}
+function reject(id,lines){
+  if(S.f["rj_"+id]){say("כבר קיבלת תשובה. ״לא״ זה ״לא״ — גם בלי fine‑tuning.");return true;}
+  say(lines,()=>{S.f["rj_"+id]=1;S.f.rejects=(S.f.rejects||0)+1;tone(140,.35,"sawtooth",.05);renderInv();
+    say(`📋 תלונת HR מספר ${S.f.rejects} נפתחה.`);
+    if(S.f.rejects===3)say("שלוש תלונות HR בערב אחד. שיא אישי. ובינתיים, בטרקלין ה‑VIP, מישהי חדשה ומסתורית מתיישבת ליד החלון...");});
   return true;
 }
-function ending(){fanfare();S.ended=true;for(let i=0;i<120;i++)conf.push({x:Math.random()*W,y:-Math.random()*400,v:1+Math.random()*2,c:["#ffd23f","#ff7ae0","#76b900","#7cf4ff","#fff"][i%5],a:Math.random()*6});
-  say(["האורות כבים. לייזרים. עשן. מוזיקת סינת׳ דרמטית. ג׳נסן עולה לבמה."],()=>{});
-  say([J("שלום AI‑CON! תראו מה הבאתי לכם — טרי מהתנור!"),"הקהל משתולל. שלושה משקיעים מתעלפים. אחד מנסה לקנות את הבמה עצמה.",J("ותזכרו: ככל שתקנו יותר — תחסכו יותר!"),"המניה עולה ב‑12% באמצע המשפט. בטרקלין, החוקרת הישנונית מתעוררת: ה‑loss סוף‑סוף ירד."],()=>{
-    const tt=document.getElementById("title");tt.innerHTML=`<h1>סוף!</h1><h2>ניקוד: ${S.score} מתוך ${MAXSCORE}</h2><p>ג׳נסן נשא את הנאום המרכזי, במעיל עור מבריק, עם GPU טרי מהתנור.<br>דילן מאמן מודל על GPU אחד (זמן משוער: 400 שנה).</p><button onclick="location.reload()">↻ שחק שוב</button>`;tt.style.display="flex";});
+function natTalk(){
+  if(!S.f.natMet){S.f.natMet=1;return[NAT("ג׳נסן ויאנג... סוף‑סוף. אני מעריצה גדולה של... הארכיטקטורה שלך."),J("באמת? מישהי שמתעניינת בי?"),NAT("מאוד. במיוחד במגבלות הייצוא שלך. ספר לי, הן... גמישות?"),"כל מערכת התרעה נורמלית הייתה מצפצפת עכשיו. אצל ג׳נסן, היא נמצאת בתיקון.",...(S.f.jacket?[]:[NAT("אבל אני יוצאת רק עם הג׳נסן האמיתי. זה עם מעיל העור.")]),NAT("ואולי תביא לי מתנה קטנה? משהו... עם הרבה זיכרון.")];}
+  if(!S.f.jacket)return[NAT("בלי מעיל עור? אולי אתה בכלל לא ג׳נסן. אני צריכה את המקור, לא את המודל המזוקק.")];
+  return[NAT("המעיל מושלם. עכשיו רק חסרה המתנה. משהו מהתנור, אולי?")];
+}
+function natUse(i){
+  if(i!=="gpu")return[NAT("חמוד. אבל אני מעדיפה מתנות עם ליבות CUDA.")];
+  if(!S.f.jacket)return[NAT("מתנה יפה... אבל אני יוצאת רק עם הג׳נסן האמיתי. זה עם המעיל.")];
+  say(["ג׳נסן מגיש לנטשה GPU טרי מהתנור. היא בוחנת אותו כמו יהלומן, ומצלמת את המדבקה עם המספר הסידורי.",NAT("כמה רומנטי. ויש עוד מאיפה שזה בא?"),J("אז... זה כן?"),NAT("זה כן. בוא ניכנס למסיבה. יש לי מיליון שאלות טכניות."),J("סוף‑סוף, מישהי שמתעניינת בי ולא רק בכרטיסים שלי."),NAT("ברור, ברור. אז כמה כאלה אפשר להעביר דרך מלזיה?")],()=>{S.gpus--;S.f.date=1;addScore(25);goRoom("congress",480,470,ending);});
+  return true;
+}
+function ending(){fanfare();S.ended=true;
+  say(["שלושה שבועות אחר כך.","חדר סגור בקונגרס. שלוש ועדות. מצלמות בחוץ. מעיל העור הוחרם כ״רכוש החברה״.",CHAIR("מר ויאנג, האם מסרת טכנולוגיה רגישה לגורם זר?"),J("מסרתי GPU אחד. בדייט. זה נחשב בקטנה."),CHAIR(`בנוסף, לפי הדיווחים, ניסית להתחיל עם ${S.f.rejects||0} גורמים שונים בערב אחד${S.f.rj_maya?", כולל עובדת שכפופה לך":""}${S.f.rj_karen?", לקוחה עם חוזה של ארבעה מיליארד":""}${S.f.rj_robot?" ורובוט רישום":""}.`),J("אני מבקש להעיד שכולן אמרו לא. זה מראה על... מערכת בקרה תקינה?"),CHAIR("יש לך משהו להוסיף לסיום?"),J("ככל שמודים יותר — חוסכים יותר?"),"המניה צונחת. מכתב ההתפטרות נכתב, כמובן, בעזרת AI. נטשה לא עונה לטלפון."],()=>{
+    const tt=document.getElementById("title");tt.innerHTML=`<h1>סוף!</h1><h2>ניקוד: ${S.score} מתוך ${MAXSCORE} · 📋 תלונות: ${S.f.rejects||0}</h2><p>ג׳נסן מצא סוף‑סוף מישהי שאמרה ״כן״. היא רק רצתה את ה‑GPU.<br>דילן עדיין מאמן מודל על GPU אחד (זמן משוער: 400 שנה).</p><p style="font-size:12px;opacity:.6">סאטירה על אירועים מדווחים. כל הדמויות מלבד ג׳נסן בדיוניות.</p><button onclick="location.reload()">↻ שחק שוב</button>`;tt.style.display="flex";});
 }
 const ROOMS={
   lobby:{floor:{l:20,r:940,t:385,b:525},s:[.56,.76],
@@ -352,9 +384,10 @@ const ROOMS={
       {id:"robot",name:"רובוט רישום",al:["רובוט","regbot","רישום"],r:[92,105,126,190],w:[175,405],
         look:"RegBot‑9000. רובוט רישום עם זיהוי פנים, מאומן על שלוש תמונות מהאינטרנט. בכולן ג׳נסן לובש מעיל עור.",
         take:()=>[J("אני לא מפרק רובוטים בפומבי. רק במעבדה.")],
-        talk:()=>{if(S.f.badge)return[ROBOT("כבר הנפקתי לך תג, אדוני. בהצלחה בנאום. אני אצפה בסטרים... כלומר, אני אהיה הסטרים.")];
+        flirt:()=>reject("robot",[J("היי, יפה. את מאומנת על משהו... או שזה טבעי?"),ROBOT("שגיאה: ניסיון פלרטוט עם חומרה. האירוע מדווח למשאבי אנוש. וליצרן. שזה גם אתה."),J("אז טכנית, הגשתי תלונה על עצמי.")]),
+        talk:()=>{if(S.f.jacket)return[ROBOT("סורק... מעיל עור: מזוהה. ברק: 98%. זיהוי: ג׳נסן ויאנג. סטטוס: מנכ״ל."),ROBOT("סטטוס בעוד שבועיים: [מסווג]."),J("מה זאת אומרת מסווג?!"),ROBOT("אני רק רובוט רישום. תשאל את ה‑FT.")];
           if(!S.f.jacket)return S.f.robotTried?[ROBOT("נא לא לנסות שוב. התחזות שנייה נשלחת אוטומטית לרגולטור."),J("אני חייב למצוא את המעיל.")]:(S.f.robotTried=1,[ROBOT("שלום, אנושי! נא לעמוד מול המצלמה לזיהוי פנים."),"הרובוט סורק את ג׳נסן מכף רגל ועד ראש. נורה אדומה מהבהבת.",ROBOT("זיהוי: ״גבר, מחייך, ג׳ינס״. התאמה לג׳נסן ויאנג: 3%. ג׳נסן ויאנג אמיתי תמיד לובש מעיל עור. ניסיון התחזות נרשם."),J("אני ג׳נסן! תסתכל על החיוך!"),ROBOT("החיוך תואם 71% לאנשים שמנסים למכור לי משהו. גישה נדחתה."),J("נהדר. רובוט שאימנתי בעקיפין חוסם אותי מהכנס של עצמי.")]);
-          say([ROBOT("סורק... מעיל עור: מזוהה. ברק: 98%. זיהוי: ג׳נסן ויאנג! סליחה על הבלבול, אדוני."),"הרובוט מדפיס תג דובר. המדפסת, כמובן, מואצת על GPU.",J("הנה. עכשיו אני רשמית אני.")],()=>{S.f.badge=1;addScore(10);});return true;},
+          return null;},
         use:i=>i==="gpu"?[ROBOT("מזוהה: GPU. רמת התרגשות: 400%. אבל אני לא יכול לקבל שוחד. בעיקר כי אין לי ידיים מתאימות.")]:i==="ticket"?[ROBOT("זה פתק מלתחה. אני מנפיק תגים, לא מעילים. היררכיה.")]:i==="mitt"?[ROBOT("כפפה? אני לא חם. אני רץ על קירור נוזלי.")]:null},
       {id:"desk",name:"דלפק רישום",al:["דלפק","סוכרי"],r:[35,284,240,94],w:[160,405],look:"דלפק הרישום. עליו קערת סוכריות בצורת שבבים. כל אחת בגודל 3 ננומטר.",take:"ג׳נסן לוקח סוכרייה. טעם של 3 ננומטר: מתוק, אבל קשה לייצר."},
       {id:"coat",name:"דורית מהמלתחה",al:["דורית","מלתחה","עובדת","פקידה"],r:[730,165,76,125],w:[770,405],
@@ -363,18 +396,19 @@ const ROOMS={
           if(S.f.ticket)return[COAT("יש לך פתק ביד, מותק. פשוט תן לי אותו.")];
           S.f.knowTicket=1;return[COAT("ערב טוב! פתק, בבקשה."),J("אין לי פתק. המעיל שלי הוא השחור. מעור."),COAT("מותק, תסתכל מאחוריי. כנס AI. כולם פה מתלבשים כמוך."),J("הם מחקים אותי. זה מחמיא... ומאוד לא נוח כרגע."),COAT("בלי פתק — אין מעיל. זה הנוהל."),J("הפתק היה בכיס... אולי נפל לי באולם התצוגה.")];},
         take:()=>[COAT("ידיים מהדלפק, מותק.")],
+        flirt:()=>reject("coat",[J("את יודעת מה יש לי בדרך כלל מתחת למעיל?"),COAT("מותק, המעיל שלך אצלי. אז אני יודעת בדיוק מה יש לך עכשיו: חולצה עם לב ירוק."),J("זה לב של אהבה."),COAT("זה לוגו. אני שומרת על מעילים, לא על כבוד. פתק — או שתזוז.")]),
         use:i=>{if(i==="ticket"){say([COAT("פתק 4090! רגע..."),"דורית מחפשת בין שלושים ושבעה מעילים זהים, ושולפת אחד בלי להסס.",COAT("הנה המעיל שלך, מותק."),"ג׳נסן לובש את מעיל העור. ברקע מתנגן אקורד סינת׳ דרמטי. הברק חוזר. העוצמה חוזרת.",J("עכשיו אני מרגיש... מואץ.")],()=>{S.f.jacket=1;addScore(10);});return true;}
           if(i==="gpu")return[COAT("מותק, אני עובדת במלתחה. מה אני אעשה עם כרטיס גרפי? אני לא מאמנת מודלים בהפסקה.")];
           if(i==="badge")return[COAT("איזה יופי. אז עכשיו גם יש לך תג. מגיע לך פרס.")];return null;}},
       {id:"rack",name:"מעילים",al:["מעיל","מעילים","קולב"],r:[645,148,240,145],w:[770,405],look:"שלושים ושבעה מעילי עור שחורים, כולם זהים. זה כנס AI או מסדר זיהוי?",take:()=>[J("רק אחד מהם שלי. אני לא גונב מעילים. רק נתח שוק.")]},
-      {id:"boss",name:"ביג מייק",al:["מייק","מנהל","שומר","ביג"],r:[575,240,72,160],w:[545,420],look:"ביג מייק, מנהל הבמה. 130 קילו של נהלים, אוזניות ולוח כתיבה.",talk:bossTalk,take:()=>[BOSS("נסה לגעת בי שוב ותגלה מה זה latency.")],use:i=>(i==="badge"||i==="gpu")?bossTalk():i==="mitt"?[BOSS("כפפת תנור? אני לא אופה, אני מנהל במה.")]:null},
+      {id:"boss",name:"ביג מייק",al:["מייק","מנהל","שומר","ביג"],r:[575,240,72,160],w:[545,420],look:"ביג מייק, מנהל הבמה. 130 קילו של נהלים, אוזניות ולוח כתיבה.",talk:bossTalk,flirt:()=>[J("מייק, כבר אמרו לך שיש לך... כתפיים של דאטה סנטר?"),BOSS("כן. ואני גם יודע שאתה מחפש בת זוג למסיבה. אני לא האופציה, בוס.")],take:()=>[BOSS("נסה לגעת בי שוב ותגלה מה זה latency.")],use:i=>(i==="badge"||i==="gpu")?bossTalk():i==="mitt"?[BOSS("כפפת תנור? אני לא אופה, אני מנהל במה.")]:null},
       {id:"door",name:"דלתות הבמה",al:["דלת","דלתות","במה"],r:[392,168,176,172],w:[480,398],look:"דלתות לאולם המרכזי. מאחוריהן עשרים אלף איש מחכים לשמוע על טריליון פרמטרים.",take:"נעול. ביג מייק מסתכל על ג׳נסן כמו על באג בפרודקשן.",talk:()=>[J("דלת, את מכירה אותי, נכון?"),"הדלת שותקת. הלחץ מתחיל להשפיע."]},
       {id:"banner",name:"שלט הכנס",al:["שלט","באנר"],r:[300,50,360,82],w:null,look:"״AI‑CON 2026: העתיד מואץ״. בשנה שעברה הסלוגן היה ״העתיד מגיע״. זו התקדמות."},
       {id:"plant",name:"עציץ",al:["עציץ","צמח"],r:[336,250,54,90],w:[360,400],look:"עציץ פלסטיק. אפילו הצמחים כאן סינתטיים.",take:()=>[J("יש לי מספיק דברים שגדלים אקספוננציאלית.")]},
       {id:"exit",name:"לאולם התצוגה",al:["תצוגה","אקספו","expo","ימינה"],r:[880,135,80,250],w:[928,450],exit:["expo",70,455],look:"מעבר לאולם התצוגה. נשמעים משם פיצ׳ים בקצב של שלושה לדקה."}
     ]},
   expo:{floor:{l:20,r:940,t:390,b:525},s:[.56,.76],
-    actors:t=>[{y:448,d:()=>dylan(300,448,.66,t,S.f.ticket||S.f.jacket)}],
+    actors:t=>[{y:448,d:()=>dylan(300,448,.66,t,S.f.ticket||S.f.jacket)},{y:450,d:()=>maya(760,450,.66,t)}],
     dyn(t){if(!S.f.mitt){mitt(450,292,.7,-.3);mitt(478,290,.7,.2,"#ff6b6b");mitt(560,292,.7,-.1);}else mitt(560,292,.7,-.1);
       const tx=650+((t*40)%220),ty=345-Math.abs(Math.sin(t*4))*10;X.save();X.translate(tx,ty);X.rotate(t*4);X.strokeStyle="#a07a40";X.lineWidth=2;for(let k=0;k<6;k++){P();X.arc(Math.cos(k)*3,Math.sin(k)*3,9+k%3*2,k,k+4);X.stroke();}X.restore();
       crowdHead(820,404,.45,"#3a5a8a",t,1.2);crowdHead(770,412,.48,"#8a3a5a",t,2.4,2);},
@@ -385,10 +419,17 @@ const ROOMS={
           if(S.f.metDylan)return[DYL("GPU אחד ואתה מקבל את הפתק. מילה של מייסד."),J("מילה של מייסד זה לא בדיוק בטוחה.")];
           S.f.metDylan=1;return[DYL("ג׳נסן?! ג׳נסן ויאנג?! בלי המעיל כמעט לא זיהיתי!"),DYL("אתה חייב לשמוע את הפיץ׳: ״אובר — אבל לפרומפטים״!"),J("זה... נשמע כמו משפט."),DYL("אגב, מצאתי על הרצפה פתק מלתחה. מספר 4090. שלך?"),J("כן! תודה רבה!"),DYL("וואו, וואו. בעולם הסטארטאפים אין ארוחות חינם. הפתק תמורת GPU אחד. רק אחד. אנחנו מאוד pre‑seed.")];},
         take:()=>[DYL("אחי, אל תיגע בלפטופ. יש עליו את ה‑deck.")],
+        flirt:()=>[J("דילן, אתה נראה... מגויס היטב."),DYL("אחי, אם זה term sheet — אני בפנים. אם זה משהו אחר — אני עדיין בפנים, אנחנו pre‑seed.")],
         use:i=>{if(i==="gpu"){if(S.f.gaveGpu)return[DYL("כבר נתת לי אחד. אני לא חמדן. ...טוב, אני כן, אבל עוד לא גייסתי.")];
             say([DYL("זה... GPU? אמיתי?! הוא עוד חם!"),"דילן מחבק את הכרטיס ומתחיל לבכות בשקט.",DYL("קח את הפתק! קח הכל! רוצה 5% מהחברה?"),J("רק את הפתק, תודה. ושמור על הקירור.")],()=>{S.gpus--;S.f.gaveGpu=1;S.f.ticket=1;S.f.metDylan=1;addScore(10);});return true;}
           if(i==="mitt")return[DYL("כפפת תנור? יש לי כבר שלוש. אני תמיד לוקח את כל ה‑SWAG.")];
           if(i==="badge")return[DYL("תג דובר! תוכל להכניס אותי לבמה? לא? אוקיי, אני אחכה לדמו דיי.")];return null;}},
+      {id:"maya",name:"מאיה, סמנכ״לית שיווק",al:["מאיה","סמנכ","שיווק","עובדת"],r:[730,278,60,172],w:[680,455],
+        look:"מאיה, סמנכ״לית השיווק של ג׳נסן. היא כפופה ישירות אליו. זה פרט שכדאי לזכור. ג׳נסן, כמובן, לא זוכר.",
+        talk:()=>[MAYA("ג׳נסן! הדוכן שלנו מוכן, המצגות מוכנות. רק אל תעשה שום דבר מביך הערב, כן?"),J("אני? מביך?")],
+        flirt:()=>reject("maya",[J("מאיה... רוצה לראות את ה‑roadmap האישי שלי? יש בו ארוחת ערב, יין ו... סינרגיה."),MAYA("ג׳נסן. אני כפופה לך."),J("ואני מאוד אוהב את המבנה הארגוני."),MAYA("זה בדיוק הסעיף הראשון בהדרכת משאבי האנוש שחתמת עליה בעצמך."),J("אני חותם על הרבה דברים."),MAYA("מעולה. אז תחתום גם על התלונה. אני מעבירה ל‑HR. ול‑FT, ליתר ביטחון.")]),
+        take:()=>[MAYA("ידיים בכיסים, ג׳נסן. או לפחות על המעיל.")],
+        use:i=>i==="gpu"?[MAYA("לא, ג׳נסן. מתנות לעובדות זה הסעיף השני בהדרכה.")]:i==="mitt"?[MAYA("כפפת תנור? זה ממש לא מתאים לי. אני לא מוכנה לבשל לך.")]:null},
       {id:"vend",name:"GPU‑o‑Matic",al:["מכונה","אוטומט","matic","מכונת"],r:[35,150,110,236],w:[160,410],look:"GPU‑o‑Matic. מכונה אוטומטית לכרטיסים גרפיים. כתוב עליה: ״אזל המלאי. זמן אספקה: 52 שבועות״.",take:"ג׳נסן מנער את המכונה. נופל ממנה רק מסמך תנאי שימוש בן 400 עמודים.",talk:()=>[J("אפילו אני לא יכול להשיג ממך GPU?"),"המכונה מציגה: ״נא להצטרף לרשימת ההמתנה. מיקומך: 1,048,576״."],use:i=>i==="gpu"?[J("להחזיר למכונה? לא. גם ככה יש מחסור.")]:null},
       {id:"boothB",name:"דוכן Kitchen‑AI",al:["kitchen","מטבח","דוכן"],r:[400,128,210,234],w:[505,410],
         look:()=>S.f.mitt?"דוכן Kitchen‑AI. כבר לקחת כפפה. אל תהיה חמדן, משאירים SWAG לסטודנטים.":"דוכן Kitchen‑AI: ״המטבח החכם הראשון״. על הדלפק ערמה של כפפות תנור ממותגות. SWAG חינם!",
@@ -400,7 +441,7 @@ const ROOMS={
       {id:"exitR",name:"לטרקלין ה‑VIP",al:["vip","טרקלין","לאונג"],r:[858,108,102,275],w:[915,410],exit:["lounge",90,440],look:"הכניסה לטרקלין ה‑VIP. חבל קטיפה אדום, אבל השומר הלך להפסקת קומבוצ׳ה."}
     ]},
   lounge:{floor:{l:20,r:940,t:395,b:525},s:[.58,.76],
-    actors:t=>[{y:470,d:()=>sleeper(t)}],
+    actors:t=>{const a=[{y:470,d:()=>sleeper(t)},{y:437,d:()=>karen(330,437,.64,t)}];if((S.f.rejects||0)>=3&&!S.f.date)a.push({y:446,d:()=>natasha(860,446,.65,t)});return a;},
     dyn(t){R(650,276,132,72,8,S.f.oven?"#2a1206":lg(0,276,0,348,["#ff9a3a","#c2410c"]),3);
       if(!S.f.oven){gpu(688,318,.36,.05);gpu(746,316,.36,-.06);X.fillStyle=`rgba(255,200,80,${.15+Math.sin(t*3)*.08})`;X.fillRect(652,278,128,68);
         for(let k=0;k<3;k++){const yy=262-((t*25+k*20)%40);X.strokeStyle=`rgba(255,255,255,${.4-((t*25+k*20)%40)/100})`;X.lineWidth=3;P();X.moveTo(690+k*25,yy+18);X.quadraticCurveTo(684+k*25,yy+8,690+k*25,yy);X.stroke();}}
@@ -409,21 +450,31 @@ const ROOMS={
     hs:[
       {id:"oven",name:"תנור",al:["תנור","אופה"],r:[630,214,172,172],w:[716,415],
         look:()=>S.f.oven?"תנור ריק. עדיין עומד באוויר ריח של סיליקון טרי.":"תנור תעשייתי. דרך החלון רואים שני כרטיסים גרפיים נאפים בחום נעים. מישהו פה בטוח זוכר את הקינוט מהמטבח.",
-        take:()=>ovenTake(),talk:()=>[J("תנור, תנור שבקיר — מי ה‑GPU הכי מהיר?"),"התנור מצפצף שלוש פעמים. כנראה ״אתה״."],use:i=>i==="mitt"?ovenTake():i==="gpu"?[J("הם כבר אפויים. עוד דקה והם יהיו פריכים מדי לדמו.")]:null},
+        take:()=>ovenTake(),flirt:"ג׳נסן קורץ לתנור. התנור חם. זה הקשר הכי בריא שהיה לו הערב.",talk:()=>[J("תנור, תנור שבקיר — מי ה‑GPU הכי מהיר?"),"התנור מצפצף שלוש פעמים. כנראה ״אתה״."],use:i=>i==="mitt"?ovenTake():i==="gpu"?[J("הם כבר אפויים. עוד דקה והם יהיו פריכים מדי לדמו.")]:null},
+      {id:"nat",name:"נטשה המסתורית",al:["נטשה","מסתורית","יועצת","מרגלת"],show:()=>(S.f.rejects||0)>=3,r:[830,276,62,170],w:[775,452],
+        look:"אישה מסתורית במעיל טרנץ׳, משקפי שמש בחלל סגור, ותג ״נטשה — יועצת, משרד החטיפים הממלכתי״. היא מחייכת לג׳נסן. היחידה הערב.",
+        talk:natTalk,flirt:natTalk,take:()=>[NAT("סבלנות, ג׳נסן. קודם מתנה.")],use:natUse},
+      {id:"karen",name:"קרן, CTO של ענן",al:["קרן","cto","לקוחה","ענן"],r:[302,272,58,165],w:[402,440],
+        look:"קרן, CTO של ענן ענק. לקוחה עם הזמנה של ארבעה מיליארד דולר. היא פה בשביל GPUs, לא בשביל ג׳נסן.",
+        talk:()=>[KAREN("ג׳נסן. מתי מגיעה ההקצאה שלנו? הבטחת לי ברבעון שעבר."),J("היא בדרך. כמו כל דבר טוב.")],
+        flirt:()=>reject("karen",[J("קרן... אני יכול להבטיח לך הקצאה מועדפת. מאוד מועדפת. בארוחת ערב."),KAREN("יש לי איתך חוזה של ארבעה מיליארד. אני רוצה ממך GPUs, לא שורות פתיחה."),J("אפשר את שניהם. חבילה."),KAREN("שלח לי את זה במייל, ג׳נסן. אני אוהבת שיש תיעוד. גם המחלקה המשפטית שלי אוהבת.")]),
+        take:()=>[KAREN("אל תיגע בטלפון שלי. אני באמצע שיחה עם AMD.")],
+        use:i=>i==="gpu"?[KAREN("GPU אחד? אני צריכה מאה אלף. ואת זה לא תקנה איתי בדייט.")]:null},
       {id:"sleeper",name:"חוקרת ישנונית",al:["חוקרת","ישנ","פוף"],r:[355,400,175,92],w:[580,480],look:"חוקרת AI ישנה על פוף. על הלפטופ שלה רץ אימון כבר 11 ימים. היא לא תתעורר עד שה‑loss יירד.",
-        talk:()=>[SLEEPY("zzz... ה‑loss יורד... zzz... עוד epoch אחד, אמא..."),J("אני מכיר את ההרגשה.")],take:()=>[J("להעיר חוקרת באמצע אימון? יש חוקים בעולם הזה.")],
+        talk:()=>[SLEEPY("zzz... ה‑loss יורד... zzz... עוד epoch אחד, אמא..."),J("אני מכיר את ההרגשה.")],flirt:()=>[J("היי... את באה לכאן הרבה?"),SLEEPY("zzz... early stopping... zzz..."),"גם מתוך שינה עמוקה, היא יודעת לעצור תהליך שלא מתכנס."],take:()=>[J("להעיר חוקרת באמצע אימון? יש חוקים בעולם הזה.")],
         use:i=>i==="gpu"?[SLEEPY("zzz... תשאיר אותו ליד ה‑cluster... zzz..."),"אבל את ה‑GPU הזה ג׳נסן עוד צריך. הוא מחזיר אותו לכיס, בזהירות."]:i==="mitt"?["ג׳נסן מניח את הכפפה מתחת לראשה כמו כרית. היא מחייכת בשינה. ואז הוא לוקח אותה בחזרה."]:null},
       {id:"bar",name:"בר",al:["בר","קומבוצ","משקה","שתייה"],r:[90,160,235,225],w:[210,412],look:"בר VIP. קומבוצ׳ה מהחבית, מים ממקור ״דאטה סנטר ירוק״ וקפה שמזמין לך AI agent.",take:"ג׳נסן מוזג קומבוצ׳ה. טעם של סטארטאפ: חמוץ, תוסס ומוערך יתר על המידה.",talk:()=>[J("ברמן?"),"אין ברמן. רק שלט: ״השירות ניתן ע״י agent. זמן תגובה ממוצע: 3 עד 40 דקות״."]},
       {id:"window",name:"חלון",al:["חלון","נוף","עיר"],r:[380,66,260,150],w:null,look:"נוף לעמק הסיליקון בלילה. כל נקודת אור שם היא דאטה סנטר. רובם, איכשהו, קשורים אליו."},
       {id:"vip",name:"שלט VIP",al:["שלט"],r:[690,52,180,86],w:null,look:"שלט ניאון: VIP. Very Important Processors. בני אדם מוזמנים לחכות בחוץ."},
       {id:"exit",name:"לאולם התצוגה",al:["תצוגה","אקספו","expo","יציאה","שמאלה"],r:[0,130,74,255],w:[28,430],exit:["expo",860,430],look:"חזרה לאולם התצוגה."}
     ]},
-  stage:{floor:{l:480,r:480,t:372,b:372},s:[.72,.72],
+  congress:{floor:{l:480,r:480,t:470,b:470},s:[.62,.62],
     actors:t=>[],
-    dyn(t){for(const[bx,c,ph]of[[160,"rgba(255,122,224,.18)",0],[480,"rgba(255,255,220,.22)",1],[800,"rgba(124,244,255,.18)",2]]){const a=Math.sin(t*1.2+ph)*.35;X.save();X.translate(bx,0);X.rotate(a);X.fillStyle=c;P();X.moveTo(-12,0);X.lineTo(12,0);X.lineTo(120,560);X.lineTo(-120,560);X.fill();X.restore();}
-      jensen(480,372,.72,1,0,false,true,t,"raise");
-      for(let i=0;i<14;i++)crowdHead(30+i*70,520+(i%2)*6,.9,["#3a5a8a","#8a3a5a","#4a7a3a","#6a4a8a","#8a6a2a"][i%5],t,i*.7,i%3===0?1:i%4===1?2:0);
-      conf.forEach(c=>{c.y+=c.v;c.a+=.05;if(c.y>H)c.y=-10;X.save();X.translate(c.x+Math.sin(c.a)*10,c.y);X.rotate(c.a);X.fillStyle=c.c;X.fillRect(-4,-2,8,4);X.restore();});},
+    dyn(t){jensen(480,478,.6,1,0,false,false,t);
+      R(300,392,360,90,6,lg(0,392,0,482,["#7a4a26","#4a2810"]),3);R(290,384,380,14,4,"#9a6a3a",3);
+      line([480,384,470,350],OL,3);E(468,346,7,9,"#333",2.5);R(420,400,120,24,4,"#f5ecd0",2.5);txt("MR. HUANG",480,412,12,OL,{dir:"ltr",w:900});
+      for(let i=0;i<14;i++)crowdHead(30+i*70,528+(i%2)*6,.85,["#3a3a48","#4a3a3a","#2a3a4a"][i%3],t,i*.9,i%2?2:0);
+      for(let k=0;k<3;k++){const ph=(t*1.7+k*.37)%1;if(ph<.08){const fx=(k*347+Math.floor(t*1.7)*131)%W;X.fillStyle="rgba(255,255,255,.75)";E(fx,470,40,40,"rgba(255,255,255,.6)",0);}}},
     hs:[]}
 };
 function sleeper(t){X.save();P();X.moveTo(360,480);X.bezierCurveTo(350,420,420,405,470,412);X.bezierCurveTo(530,418,540,470,520,490);X.quadraticCurveTo(440,505,360,480);fs("#7b3fd1",3);
@@ -445,7 +496,7 @@ function goRoom(id,x,y,cb){S.fade=1;S.room=id;S.x=S.tx=x;S.y=S.ty=y;S.moving=fal
 function walkTo(x,y,cb){const f=room().floor;S.tx=Math.max(f.l,Math.min(f.r,x));S.ty=Math.max(f.t,Math.min(f.b,y));S.pending=cb||null;
   if(Math.hypot(S.tx-S.x,S.ty-S.y)<2){S.moving=false;S.pending=null;cb&&cb();}else S.moving=true;}
 function hitJensen(x,y){const s=scaleAt(S.y);return Math.abs(x-S.x)<30*s/.7&&y<S.y&&y>S.y-270*s;}
-function hotspotAt(x,y){return room().hs.find(h=>x>=h.r[0]&&x<=h.r[0]+h.r[2]&&y>=h.r[1]&&y<=h.r[1]+h.r[3])||null;}
+function hotspotAt(x,y){return room().hs.find(h=>(!h.show||h.show())&&x>=h.r[0]&&x<=h.r[0]+h.r[2]&&y>=h.r[1]&&y<=h.r[1]+h.r[3])||null;}
 function handle(v,def){let r=v;if(typeof r==="function")r=r();if(r===true)return;if(r==null)r=def;if(r!=null)say(r);}
 function act(h,verb,item){
   if(verb==="look"){handle(h.look,DEF.look[0]);return;}
@@ -453,6 +504,7 @@ function act(h,verb,item){
     if(h.exit&&verb!=="item"){goRoom(...h.exit);return;}
     if(verb==="take")handle(h.take,J(pick(DEF.take)));
     else if(verb==="talk")handle(h.talk,J(pick(DEF.talk)));
+    else if(verb==="flirt")handle(h.flirt,`ג׳נסן קורץ ל${h.name}. ${pick(["אין תגובה. בדומה לדירקטוריון.","זה לא מחזיר קריצה. גם לא באדיבות.","שום דבר. אפילו לא תלונה."])}`);
     else if(verb==="item")handle(h.use?()=>h.use(item):null,J(pick(DEF.item)));
     else if(verb==="walk"&&!h.w){}};
   if(h.w)walkTo(h.w[0],h.w[1],run);else run();
@@ -460,6 +512,7 @@ function act(h,verb,item){
 function selfAct(verb,item){
   if(verb==="look")say(S.f.jacket?"זה ג׳נסן. מנכ״ל. חזון. מעיל עור. הכל במקום.":"זה ג׳נסן. מנכ״ל. חזון. חיוך של טריליון דולר. ובלי מעיל עור, הוא נראה כמו אבא בטיול שנתי.");
   else if(verb==="talk")say([J("ג׳נסן, אתה גאון."),J("תודה, ג׳נסן.")]);
+  else if(verb==="flirt")say("ג׳נסן מפלרטט עם ההשתקפות שלו בזכוכית. סוף‑סוף מישהו שמסכים איתו על הכל.");
   else if(verb==="take")say("ג׳נסן מאסף את עצמו. רגשית.");
   else if(verb==="item")say(item==="mitt"?[J("אני לא צריך כפפה. הידיים שלי לא חמות. רק המניה.")]:item==="gpu"?["ג׳נסן מצמיד את ה‑GPU ללחי. חם ונעים. הוא כמעט רוגע."]:item==="badge"?["ג׳נסן מתקן את התג על החזה. מושלם."]:[J("אני לא מלתחה.")]);
 }
@@ -485,11 +538,11 @@ function frame(ts){
   X=ctx;X.setTransform(2,0,0,2,0,0);
   if(BG[S.room])X.drawImage(BG[S.room],0,0,W,H);
   const r=room();r.dyn&&r.dyn(S.t);
-  if(S.room!=="stage"){const acts=r.actors(S.t).concat([{y:S.y,d:()=>jensen(S.x,S.y,scaleAt(S.y),S.dir,S.ph,S.moving,!!S.f.jacket,S.t)}]);acts.sort((a,b)=>a.y-b.y).forEach(a=>a.d());}
+  if(S.room!=="congress"){const acts=r.actors(S.t).concat([{y:S.y,d:()=>jensen(S.x,S.y,scaleAt(S.y),S.dir,S.ph,S.moving,!!S.f.jacket,S.t)}]);acts.sort((a,b)=>a.y-b.y).forEach(a=>a.d());}
   X.drawImage(VIG,0,0,W,H);
   if(!msgOpen&&S.started&&!S.ended&&S.mx>=0){let label=null;const h=hotspotAt(S.mx,S.my);
     if(S.verb!=="walk"&&hitJensen(S.mx,S.my))label="ג׳נסן";else if(h)label=h.name;
-    const vt={walk:"לך אל",look:"הסתכל על",take:"קח",talk:"דבר עם",item:"השתמש ב"+(S.item?ITEMS[S.item].name:"")+" על"}[S.verb];
+    const vt={walk:"לך אל",look:"הסתכל על",take:"קח",talk:"דבר עם",flirt:"פלרטט עם",item:"השתמש ב"+(S.item?ITEMS[S.item].name:"")+" על"}[S.verb];
     const s=label?`${vt} ${label}`:(S.verb==="item"?vt+"...":null);
     cv.style.cursor=label?"pointer":"crosshair";
     if(s){X.font="800 15px Rubik,Arial";X.direction="rtl";const w=X.measureText(s).width+20;let lx=Math.min(W-w-6,Math.max(6,S.mx-w/2)),ly=S.my-44<4?S.my+24:S.my-44;R(lx,ly,w,28,14,"#fffbea",3);txt(s,lx+w/2,ly+14,15,OL);}}
@@ -498,7 +551,7 @@ function frame(ts){
 }
 let VIG;
 function buildAll(){const mk=f=>{const[c,g]=mkCanvas();const o=X;X=g;f();X=o;return c;};
-  BG.lobby=mk(bgLobby);BG.expo=mk(bgExpo);BG.lounge=mk(bgLounge);BG.stage=mk(bgStage);
+  BG.lobby=mk(bgLobby);BG.expo=mk(bgExpo);BG.lounge=mk(bgLounge);BG.congress=mk(bgCongress);
   VIG=mk(()=>{const g=X.createRadialGradient(W/2,H/2,H*.35,W/2,H/2,H*.95);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(10,0,20,.45)");X.fillStyle=g;X.fillRect(0,0,W,H);});}
 
 /* ---------- input ---------- */
@@ -506,19 +559,20 @@ function pos(e){const b=cv.getBoundingClientRect();return[(e.clientX-b.left)/b.w
 cv.addEventListener("click",e=>{const[x,y]=pos(e);onClick(x,y);});
 cv.addEventListener("mousemove",e=>{[S.mx,S.my]=pos(e);});
 cv.addEventListener("mouseleave",()=>{S.mx=-1;});
-cv.addEventListener("contextmenu",e=>{e.preventDefault();const o=["walk","look","take","talk"];setVerb(o[(o.indexOf(S.verb)+1)%4]);});
+cv.addEventListener("contextmenu",e=>{e.preventDefault();const o=["walk","look","take","talk","flirt"];setVerb(o[(o.indexOf(S.verb)+1)%5]);});
 document.querySelectorAll(".vb").forEach(b=>b.onclick=()=>{if(msgOpen){next();return;}setVerb(b.dataset.v);});
 document.addEventListener("keydown",e=>{if(e.target.id==="parser")return;if(msgOpen&&[" ","Enter","Escape"].includes(e.key)){e.preventDefault();next();}});
 document.getElementById("hint").onclick=()=>{if(!S.started||S.ended)return;if(msgOpen){next();return;}say(hint());};
 document.getElementById("snd").onclick=e=>{S.sound=!S.sound;e.currentTarget.textContent=S.sound?"🔊":"🔇";};
-function hint(){const f=S.f;
-  if(f.badge)return"💡 ביג מייק בלובי מחכה. יש לך תג ויש לך דמו. לך תהיה אגדה.";
-  if(f.jacket)return"💡 עכשיו כשאתה נראה כמו עצמך, נסה שוב לדבר עם רובוט הרישום.";
-  if(f.ticket)return"💡 בחר את הפתק בתיק ולחץ על דורית מהמלתחה.";
-  if(S.gpus>0)return f.metDylan?"💡 דילן באולם התצוגה רוצה GPU. בחר את הכרטיסים בתיק ולחץ עליו.":"💡 מישהו באולם התצוגה מצא משהו ששייך לך. דבר עם האנשים שם.";
-  if(f.mitt)return"💡 בטרקלין ה‑VIP יש תנור חם מאוד. ויש לך כפפה...";
-  if(f.metDylan)return"💡 דילן רוצה GPU. המכונה האוטומטית ריקה... אבל אולי מישהו אופה כאלה? ותצטרך להגן על הידיים.";
-  return"💡 התחל בלדבר עם כולם: הרובוט, דורית מהמלתחה וביג מייק. ואז צא לאולם התצוגה (מימין).";}
+function hint(){const f=S.f,r=f.rejects||0;
+  if(!f.bossMet&&r===0&&!f.mitt)return"💡 דבר עם ביג מייק ליד דלתות הבמה כדי להבין מה המטרה. ואז נסה את 😏 על כל מי שזז.";
+  if(r<3)return`💡 מישהו בטרקלין יופיע רק כשג׳נסן יהיה מספיק נואש. כרגע: ${r} מתוך 3 סירובים. נסה את 😏 על דורית, מאיה, קרן... או אפילו על הרובוט.`;
+  if(!f.natMet)return"💡 מישהי חדשה ומסתורית מחכה בטרקלין ה‑VIP. לך לדבר איתה.";
+  if(!f.mitt)return"💡 נטשה רוצה מתנה עם הרבה זיכרון. בתנור בטרקלין נאפים GPUs, אבל הם חמים. בדוכן Kitchen‑AI מחלקים כפפות.";
+  if(S.gpus===0&&!f.oven)return"💡 יש לך כפפה. התנור בטרקלין מחכה.";
+  if(!f.jacket&&!f.ticket)return f.metDylan?"💡 דילן באולם התצוגה מחזיק את פתק המלתחה, והוא רוצה GPU.":"💡 נטשה רוצה את ג׳נסן עם המעיל. מישהו באולם התצוגה מצא את הפתק. דבר עם האנשים שם.";
+  if(f.ticket&&!f.jacket)return"💡 בחר את הפתק בתיק ולחץ על דורית מהמלתחה.";
+  return"💡 מעיל — יש. GPU — יש. בחר את ה‑GPU בתיק ולחץ על נטשה. מה כבר יכול להשתבש?";}
 const parser=document.getElementById("parser");
 parser.addEventListener("keydown",e=>{if(e.key!=="Enter")return;e.preventDefault();if(msgOpen){next();return;}const s=parser.value;parser.value="";if(S.started&&!S.ended)parse(s);});
 function parse(raw){const s=raw.trim().toLowerCase();if(!s)return;
@@ -528,9 +582,9 @@ function parse(raw){const s=raw.trim().toLowerCase();if(!s)return;
   if(has(["קנה","buy"]))return say(J("ככל שתקנו יותר — תחסכו יותר!"));
   if(has(["מלאי","תיק","inventory"]))return say(invList().length?"בתיק: "+invList().map(i=>ITEMS[i].name).join(", ")+".":"התיק ריק. כמו הוויכוח על AGI.");
   if(has(["ניקוד","score"]))return say(`ניקוד: ${S.score} מתוך ${MAXSCORE}.`);
-  let verb=has(["תן","הבא","השתמש","הפעל","הראה","give","use"])?"item":has(["הסתכל","בדוק","הבט","תאר","look"])?"look":has(["דבר","שוחח","שאל","talk"])?"talk":has(["קח","הרם","פתח","לקח","take","open","get"])?"take":has(["לך","זוז","צא","walk","go"])?"walk":null;
+  let verb=has(["תן","הבא","השתמש","הפעל","הראה","give","use"])?"item":has(["הסתכל","בדוק","הבט","תאר","look"])?"look":has(["פלרט","התחל","תתחיל","קרוץ","flirt"])?"flirt":has(["דבר","שוחח","שאל","talk"])?"talk":has(["קח","הרם","פתח","לקח","take","open","get"])?"take":has(["לך","זוז","צא","walk","go"])?"walk":null;
   const item=invList().find(i=>ITEMS[i].al.some(a=>s.includes(a)));
-  const h=room().hs.find(h=>h.al.some(a=>s.includes(a)));
+  const h=room().hs.find(h=>(!h.show||h.show())&&h.al.some(a=>s.includes(a)));
   if(verb==="item"&&item&&h)return act(h,"item",item);
   if(verb==="item"&&h&&!item)return act(h,"take");
   if(item&&!h&&(verb==="look"||!verb)){const d=ITEMS[item].desc;return say(typeof d==="function"?d():d);}
@@ -541,7 +595,7 @@ function parse(raw){const s=raw.trim().toLowerCase();if(!s)return;
   say(pick([J("לא הבנתי. ואני בניתי את רוב החומרה שמבינה דברים."),"המספר לא מכיר את המילה הזאת. נסה ״הסתכל״, ״קח״, ״דבר עם״ או ״תן X ל‑Y״.",J("אולי תנסח את זה כמו prompt?")]));}
 
 document.getElementById("start").onclick=()=>{document.getElementById("title").style.display="none";S.started=true;tone(440,.1);setTimeout(()=>tone(660,.15),100);
-  say(["סן חוזה, כנס AI‑CON 2026. עשרים דקות לפני הנאום המרכזי.",J("רגע. איפה מעיל העור שלי?!"),"ג׳נסן הפקיד את המעיל במלתחה... והפתק נעלם. בלי מעיל העור, אף אחד לא יאמין שזה באמת הוא.",J("בלי המעיל אני סתם בחור בג׳ינס שמדבר על טרנספורמרים."),"(בחר פעולה בסרגל למטה ולחץ על דברים בתמונה. אפשר גם להקליד פקודות. כפתור 💡 נותן רמז. לחיצה ימנית מחליפה פעולה.)"]);};
+  say(["סן חוזה, כנס AI‑CON 2026. ערב אחד לפני הכותרות.",J("הערב אני לא הולך הביתה לבד. אני ג׳נסן. אני מואץ."),"קטנה אחת: ג׳נסן הפקיד את מעיל העור במלתחה, והפתק נעלם. בלי המעיל, הקסם שלו יורד בכ‑97%.",J("בלי המעיל אני סתם בחור בג׳ינס שמדבר על טרנספורמרים. אבל זה לא יעצור אותי."),"(הפעולה 😏 נועדה לפלרטוט. כל ניסיון כזה עלול להיגמר בתלונה ל‑HR.)","(בחר פעולה בסרגל למטה ולחץ על דברים בתמונה. אפשר גם להקליד פקודות. כפתור 💡 נותן רמז. לחיצה ימנית מחליפה פעולה.)"]);};
 
 const ready=document.fonts&&document.fonts.ready?Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]):Promise.resolve();
 ready.then(()=>{buildAll();renderInv();requestAnimationFrame(frame);});
